@@ -1,28 +1,56 @@
 import './pages/index.css';
-// @todo: Темплейт карточки
-const cardsContainer = document.querySelector('.places__list');
-const cardTemplate = document.querySelector('#card-template').content;
-// @todo: DOM узлы
+import { initialCards } from './scripts/cards';
+import { openPopup, closePopup } from './components/modal';
+import { createCard, deleteCard } from './components/card';
+import { cardsContainer, popupProfleButton, popupAddButton, popupImgButton, profileTitle, profileDescription, popupTypeEdit, formEditProfile, inputName, inputBio, popupNewCard, formNewPlace, inputCardName, inputCardLink, popupImg, popups} from './components/constants';
 
-// @todo: Функция создания карточки
-function createCard(data, deleteCard) {
-    const cardElement = cardTemplate.querySelector('.card').cloneNode(true); 
 
-    cardElement.querySelector('.card__image').src = data.link;
-    cardElement.querySelector('.card__image').alt = data.name;
-    cardElement.querySelector('.card__title').textContent = data.name;
+popupProfleButton.addEventListener('click', function () {
+  inputName.value = profileTitle.textContent;
+  inputBio.value = profileDescription.textContent;
+  openPopup(popupTypeEdit);
+});
 
-    cardElement.querySelector('.card__delete-button').addEventListener('click', function () {
-        deleteCard(cardElement);
-    });
+popupAddButton.addEventListener('click', () => openPopup(popupNewCard));
 
-    return cardElement;
+popups.forEach((popup) => {
+  popup.addEventListener('mousedown', (evt) => {
+    if (evt.target.classList.contains('popup_is-opened')) {
+      closePopup(popup)
+    }
+    if (evt.target.classList.contains('popup__close')) {
+      closePopup(popup)
+    }
+  });
+});
+
+function handleFormProfileSubmit(evt) {
+    evt.preventDefault(); 
+                                                // Так мы можем определить свою логику отправки.
+                                                // О том, как это делать, расскажем позже.
+
+    const newName = inputName.value;
+    const newBio = inputBio.value;
+
+    profileTitle.textContent = newName;
+    profileDescription.textContent = newBio;
+
+    closePopup(popupTypeEdit);
 }
+popupTypeEdit.addEventListener('submit', handleFormProfileSubmit);
 
-// @todo: Функция удаления карточки
-function deleteCard(cardElement) {
-    cardElement.remove();
+
+
+function handleFormCardSubmit(evt) {
+    evt.preventDefault(); 
+    
+    const newCard = createCard({name: inputCardName.value, link: nputCardLink.value}, deleteCard);
+
+    cardsContainer.prepend(newCard);
+
+    closePopup(popupAddButton);
 }
+popupAddButton.addEventListener('submit', handleFormCardSubmit);
 
 // @todo: Вывести карточки на страницу
 function addCardsToPage(cards) {
@@ -34,4 +62,4 @@ function addCardsToPage(cards) {
     });
 }
 
-addCardsToPage(initialCards)
+addCardsToPage(initialCards);
