@@ -1,10 +1,10 @@
 //открытие popup
-function openPopup(popup) {
+function openModal(popup) {
     popup.classList.add('popup_is-opened');
     document.addEventListener('keydown', closeByEsc);
 };
 
-function closePopup(popup) {
+function closeModal(popup) {
     popup.classList.remove('popup_is-opened');
     document.removeEventListener('keydown', closeByEsc);
 };
@@ -12,8 +12,8 @@ function closePopup(popup) {
 function closeByEsc(evt) {
     if (evt.key === 'Escape') {
         const openedPopup = document.querySelector('.popup_is-opened')
-        closePopup(openedPopup);
+        closeModal(openedPopup);
     };
 };
 
-export {openPopup, closePopup};
+export {openModal, closeModal};

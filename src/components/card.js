@@ -1,7 +1,9 @@
 import { cardTemplate } from "./constants";
+import { openImage } from "../index";
+
 
 // Функция создания карточки
-function createCard(data, likeCard, deleteCard) {
+function createCard(data, likeCard, deleteCard, openImage) {
     const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
     const likeButton = cardElement.querySelector(".card__like-button");
     const deleteButton = cardElement.querySelector('.card__delete-button');
@@ -10,10 +12,9 @@ function createCard(data, likeCard, deleteCard) {
     cardElement.querySelector('.card__image').alt = data.name;
     cardElement.querySelector('.card__title').textContent = data.name;
 
-
     likeButton.addEventListener("click", () => likeCard(likeButton));
-
     deleteButton.addEventListener('click', () => deleteCard(cardElement));
+    cardElement.querySelector('.card__image').addEventListener('click', () => openImage(data));
 
     return cardElement;
 };
