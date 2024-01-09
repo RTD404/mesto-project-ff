@@ -1,20 +1,20 @@
 import { cardTemplate } from "./constants";
-import { openImage } from "../index";
-
 
 // Функция создания карточки
 function createCard(data, likeCard, deleteCard, openImage) {
     const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
+    const cardImage = cardElement.querySelector('.card__image');
     const likeButton = cardElement.querySelector(".card__like-button");
     const deleteButton = cardElement.querySelector('.card__delete-button');
+    
 
-    cardElement.querySelector('.card__image').src = data.link;
-    cardElement.querySelector('.card__image').alt = data.name;
+    cardImage.src = data.link;
+    cardImage.alt = data.name;
     cardElement.querySelector('.card__title').textContent = data.name;
 
     likeButton.addEventListener("click", () => likeCard(likeButton));
     deleteButton.addEventListener('click', () => deleteCard(cardElement));
-    cardElement.querySelector('.card__image').addEventListener('click', () => openImage(data));
+    cardImage.addEventListener('click', () => openImage(data));
 
     return cardElement;
 };

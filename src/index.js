@@ -2,7 +2,7 @@ import './pages/index.css';
 import { initialCards } from './scripts/cards';
 import { openModal, closeModal } from './components/modal';
 import { createCard, likeCard, deleteCard } from './components/card';
-import { cardsContainer, popupProfleButton, popupAddButton, profileTitle, profileDescription, popupTypeEdit, inputName, inputBio, popupNewCard, formNewPlace, inputCardName, inputCardLink, popups} from './components/constants';
+import { cardsContainer, popupProfleButton, popupAddButton, profileTitle, profileDescription, popupTypeEdit, inputName, inputBio, popupNewCard, formNewPlace, inputCardName, inputCardLink, imagePopup, popupImage, popupCaption, popups} from './components/constants';
 
 popupProfleButton.addEventListener('click', function () {
   inputName.value = profileTitle.textContent;
@@ -13,10 +13,6 @@ popupProfleButton.addEventListener('click', function () {
 popupAddButton.addEventListener('click', () => openModal(popupNewCard));
 
 export function openImage(data) {
-  const imagePopup = document.querySelector('.popup_type_image');
-  const popupImage = imagePopup.querySelector('.popup__image');
-  const popupCaption = imagePopup.querySelector('.popup__caption');
-
   popupImage.src = data.link;
   popupImage.alt = data.name;
   popupCaption.textContent = data.name;
@@ -26,10 +22,7 @@ export function openImage(data) {
 
 popups.forEach((popup) => {
   popup.addEventListener('mousedown', (evt) => {
-    if (evt.target.classList.contains('popup_is-opened')) {
-      closeModal(popup)
-    }
-    if (evt.target.classList.contains('popup__close')) {
+    if ((evt.target.classList.contains('popup_is-opened')) || (evt.target.classList.contains('popup__close'))) {
       closeModal(popup)
     }
   });
