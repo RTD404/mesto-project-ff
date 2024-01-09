@@ -1,7 +1,7 @@
 import './pages/index.css';
 import { initialCards } from './scripts/cards';
 import { openPopup, closePopup } from './components/modal';
-import { createCard, deleteCard } from './components/card';
+import { createCard, likeCard, deleteCard } from './components/card';
 import { cardsContainer, popupProfleButton, popupAddButton, popupImgButton, profileTitle, profileDescription, popupTypeEdit, formEditProfile, inputName, inputBio, popupNewCard, formNewPlace, inputCardName, inputCardLink, popupImg, popups} from './components/constants';
 
 
@@ -24,6 +24,7 @@ popups.forEach((popup) => {
   });
 });
 
+//редактирование профиля
 function handleFormProfileSubmit(evt) {
     evt.preventDefault(); 
                                                 // Так мы можем определить свою логику отправки.
@@ -40,23 +41,25 @@ function handleFormProfileSubmit(evt) {
 popupTypeEdit.addEventListener('submit', handleFormProfileSubmit);
 
 
-
+//добавление карточки
 function handleFormCardSubmit(evt) {
     evt.preventDefault(); 
-    
-    const newCard = createCard({name: inputCardName.value, link: nputCardLink.value}, deleteCard);
+
+    const newCard = createCard({name: inputCardName.value, link: inputCardLink.value}, likeCard, deleteCard);
 
     cardsContainer.prepend(newCard);
 
-    closePopup(popupAddButton);
+    closePopup(popupNewCard);
+
+    formNewPlace.reset();
 }
-popupAddButton.addEventListener('submit', handleFormCardSubmit);
+popupNewCard.addEventListener('submit', handleFormCardSubmit);
 
 // @todo: Вывести карточки на страницу
 function addCardsToPage(cards) {
   
     cards.forEach(function (cardData) {
-      const card = createCard(cardData, deleteCard);
+      const card = createCard(cardData, likeCard, deleteCard);
   
       cardsContainer.append(card);
     });
