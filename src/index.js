@@ -4,7 +4,6 @@ import { openModal, closeModal } from './components/modal';
 import { createCard, likeCard, deleteCard } from './components/card';
 import { cardsContainer, popupProfleButton, popupAddButton, profileTitle, profileDescription, popupTypeEdit, inputName, inputBio, popupNewCard, formNewPlace, inputCardName, inputCardLink, popups} from './components/constants';
 
-
 popupProfleButton.addEventListener('click', function () {
   inputName.value = profileTitle.textContent;
   inputBio.value = profileDescription.textContent;
@@ -50,8 +49,6 @@ function handleFormProfileSubmit(evt) {
 
     closeModal(popupTypeEdit);
 }
-popupTypeEdit.addEventListener('submit', handleFormProfileSubmit);
-
 
 //добавление карточки
 function handleFormCardSubmit(evt) {
@@ -65,7 +62,6 @@ function handleFormCardSubmit(evt) {
 
     formNewPlace.reset();
 }
-popupNewCard.addEventListener('submit', handleFormCardSubmit);
 
 // @todo: Вывести карточки на страницу
 function addCardsToPage(cards) {
@@ -77,4 +73,7 @@ function addCardsToPage(cards) {
     });
 }
 
+
+popupTypeEdit.addEventListener('submit', handleFormProfileSubmit);
+popupNewCard.addEventListener('submit', handleFormCardSubmit);
 addCardsToPage(initialCards);
