@@ -5,7 +5,6 @@ export const cardTemplate = document.querySelector('#card-template').content;
 export const popupProfleButton = document.querySelector('.profile__edit-button');
 export const popupAddButton = document.querySelector('.profile__add-button');
 
-
 export const profileTitle = document.querySelector('.profile__title');
 export const profileDescription = document.querySelector('.profile__description');
 
@@ -26,11 +25,3 @@ export const popupImage = imagePopup.querySelector('.popup__image');
 export const popupCaption = imagePopup.querySelector('.popup__caption');
 
 export const popups = document.querySelectorAll('.popup');
-
-
-
-
-
-
-
-

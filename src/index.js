@@ -12,7 +12,7 @@ popupProfleButton.addEventListener('click', function () {
 
 popupAddButton.addEventListener('click', () => openModal(popupNewCard));
 
-export function openImage(data) {
+function openImage(data) {
   popupImage.src = data.link;
   popupImage.alt = data.name;
   popupCaption.textContent = data.name;
