@@ -1,16 +1,21 @@
 import './pages/index.css';
 import { initialCards } from './scripts/cards';
+import { enableValidation, clearValidation, configForm } from './components/validation';
 import { openModal, closeModal } from './components/modal';
 import { createCard, likeCard, deleteCard } from './components/card';
 import { cardsContainer, popupProfleButton, popupAddButton, profileTitle, profileDescription, popupTypeEdit, inputName, inputBio, popupNewCard, formNewPlace, inputCardName, inputCardLink, imagePopup, popupImage, popupCaption, popups} from './components/constants';
 
-popupProfleButton.addEventListener('click', function () {
+popupProfleButton.addEventListener('click', () => {
   inputName.value = profileTitle.textContent;
   inputBio.value = profileDescription.textContent;
   openModal(popupTypeEdit);
+  clearValidation(popupTypeEdit, configForm);
 });
 
-popupAddButton.addEventListener('click', () => openModal(popupNewCard));
+popupAddButton.addEventListener('click', () => {
+  openModal(popupNewCard);
+  clearValidation(popupNewCard, configForm);
+});
 
 function openImage(data) {
   popupImage.src = data.link;
@@ -70,3 +75,5 @@ function addCardsToPage(cards) {
 popupTypeEdit.addEventListener('submit', handleFormProfileSubmit);
 popupNewCard.addEventListener('submit', handleFormCardSubmit);
 addCardsToPage(initialCards);
+
+enableValidation(configForm);
