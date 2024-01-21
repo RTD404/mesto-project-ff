@@ -1,3 +1,4 @@
+//функция показывающая ошибку
 function showInputError(formElement, inputElement, errorMessage, validationConfig) {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
     inputElement.classList.add(validationConfig.inputErrorClass);
@@ -5,6 +6,7 @@ function showInputError(formElement, inputElement, errorMessage, validationConfi
     errorElement.classList.add(validationConfig.errorClass);
 };
 
+//функция скрывающая ошибку
 function hideInputError(formElement, inputElement, validationConfig) {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
     inputElement.classList.remove(validationConfig.inputErrorClass);
@@ -12,12 +14,14 @@ function hideInputError(formElement, inputElement, validationConfig) {
     errorElement.classList.remove(validationConfig.errorClass);
 };
 
+// проверяем невалидность инпутов
 function hasInvalidInput(inputList) {
     return inputList.some((inputElement) => {
       return !inputElement.validity.valid;
     });
 };
 
+// меняет доступ к кнопке
 function toggleButtonState(inputList, buttonElement, validationConfig) {
     if (hasInvalidInput(inputList)) {
       buttonElement.classList.add(validationConfig.inactiveButtonClass);
@@ -26,6 +30,7 @@ function toggleButtonState(inputList, buttonElement, validationConfig) {
     }
 };
 
+//функция проверяющая валидность инпутов
 function checkInputValidity(formElement, inputElement, validationConfig) {
     if (inputElement.validity.patternMismatch) {
         inputElement.setCustomValidity(inputElement.dataset.errorMessage);
@@ -40,6 +45,7 @@ function checkInputValidity(formElement, inputElement, validationConfig) {
     }
 };
 
+// функция вешающая слушатель набора текста на каждый инпут
 function setEventListeners(formElement, validationConfig) {
     const inputList = Array.from(formElement.querySelectorAll(validationConfig.inputSelector));
     const buttonElement = formElement.querySelector(validationConfig.submitButtonSelector);
@@ -54,6 +60,7 @@ function setEventListeners(formElement, validationConfig) {
     });
 };
 
+// функция вызова валидации со всем функционалом
 export function enableValidation(validationConfig) {
     const formList = Array.from(document.querySelectorAll(validationConfig.formSelector));
     formList.forEach(formElement => {
@@ -61,6 +68,7 @@ export function enableValidation(validationConfig) {
     });
 };
 
+//функция очищает ошибки валидации формы и делает кнопку неактивной
 export function clearValidation(formElement, validationConfig) {
     const inputList = Array.from(formElement.querySelectorAll(validationConfig.inputSelector));
     const buttonElement = formElement.querySelector(validationConfig.submitButtonSelector);

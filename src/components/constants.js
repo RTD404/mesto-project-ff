@@ -3,6 +3,7 @@ export const cardTemplate = document.querySelector('#card-template').content;
 
 //кнопки открытия попапов
 export const popupProfleButton = document.querySelector('.profile__edit-button');
+export const popupAvatarProfleButton = document.querySelector('.profile__image');
 export const popupAddButton = document.querySelector('.profile__add-button');
 
 export const profileTitle = document.querySelector('.profile__title');
@@ -19,6 +20,12 @@ export const popupNewCard = document.querySelector('.popup_type_new-card');
 export const formNewPlace = document.forms["new-place"];
 export const inputCardName = formNewPlace.querySelector('.popup__input_type_card-name');
 export const inputCardLink = formNewPlace .querySelector('.popup__input_type_url');
+
+export const popupTypeAvatar = document.querySelector('.popup_type_avatar');
+// форма редактирования аватара
+export const formAvatarProfile = document.forms["new-avatar"];
+export const inputAvatarLink = formAvatarProfile .querySelector('.popup__input_type_url');
+
 
 export const imagePopup = document.querySelector('.popup_type_image');
 export const popupImage = imagePopup.querySelector('.popup__image');
